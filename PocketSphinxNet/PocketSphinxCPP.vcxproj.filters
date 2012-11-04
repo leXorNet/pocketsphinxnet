@@ -1,0 +1,560 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="源文件">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="头文件">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="CLR">
+      <UniqueIdentifier>{bcc8751a-ea05-4199-b27c-13016abe85cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="tlibc">
+      <UniqueIdentifier>{435f1035-89f1-460f-907a-9b2e2283e1d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util">
+      <UniqueIdentifier>{195d4361-eb7c-416d-9652-601679224866}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\headers">
+      <UniqueIdentifier>{c616e766-6955-4d22-9d06-5b455d921e82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="util\sources">
+      <UniqueIdentifier>{984f75cc-d5dc-492e-bad1-9b7b672f6b7b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+    <Text Include="src\libpocketsphinx\fast_ptm.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandLine.h">
+      <Filter>CLR</Filter>
+    </ClInclude>
+    <ClInclude Include="ArgStruct.h">
+      <Filter>CLR</Filter>
+    </ClInclude>
+    <ClInclude Include="PocketSphinxCPP.h">
+      <Filter>CLR</Filter>
+    </ClInclude>
+    <ClInclude Include="LogMath.h">
+      <Filter>CLR</Filter>
+    </ClInclude>
+    <ClInclude Include="FeatureComputation.h">
+      <Filter>CLR</Filter>
+    </ClInclude>
+    <ClInclude Include="NGramModel.h">
+      <Filter>CLR</Filter>
+    </ClInclude>
+    <ClInclude Include="FiniteStateGrammar.h">
+      <Filter>CLR</Filter>
+    </ClInclude>
+    <ClInclude Include="NBest.h">
+      <Filter>CLR</Filter>
+    </ClInclude>
+    <ClInclude Include="Lattice.h">
+      <Filter>CLR</Filter>
+    </ClInclude>
+    <ClInclude Include="Segment.h">
+      <Filter>CLR</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>CLR</Filter>
+    </ClInclude>
+    <ClInclude Include="tlibc\libct.h">
+      <Filter>tlibc</Filter>
+    </ClInclude>
+    <ClInclude Include="FrontEnd.h">
+      <Filter>CLR</Filter>
+    </ClInclude>
+    <ClInclude Include="FeatureTrans.h">
+      <Filter>CLR</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sphinxbase\bio.h">
+      <Filter>util\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sphinxbase\bitvec.h">
+      <Filter>util\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libpocketsphinx\blkarray_list.h">
+      <Filter>util\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sphinxbase\byteorder.h">
+      <Filter>util\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sphinxbase\case.h">
+      <Filter>util\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sphinxbase\ckd_alloc.h">
+      <Filter>util\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sphinxbase\cmd_ln.h">
+      <Filter>util\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\cmdln_macro.h">
+      <Filter>util\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sphinxbase\err.h">
+      <Filter>util\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sphinxbase\filename.h">
+      <Filter>util\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sphinxbase\fixpoint.h">
+      <Filter>util\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sphinxbase\genrand.h">
+      <Filter>util\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sphinxbase\glist.h">
+      <Filter>util\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sphinxbase\hash_table.h">
+      <Filter>util\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sphinxbase\heap.h">
+      <Filter>util\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sphinxbase\huff_code.h">
+      <Filter>util\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sphinxbase\info.h">
+      <Filter>util\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sphinxbase\listelem_alloc.h">
+      <Filter>util\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sphinxbase\logmath.h">
+      <Filter>util\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sphinxbase\mmio.h">
+      <Filter>util\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sphinxbase\pio.h">
+      <Filter>util\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libpocketsphinx\pocketsphinx_internal.h">
+      <Filter>util\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libpocketsphinx\posixwin32.h">
+      <Filter>util\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sphinxbase\prim_type.h">
+      <Filter>util\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sphinxbase\profile.h">
+      <Filter>util\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libpocketsphinx\s3types.h">
+      <Filter>util\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\win32\sphinx_config.h">
+      <Filter>util\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sphinxbase\strfuncs.h">
+      <Filter>util\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libpocketsphinx\tmat.h">
+      <Filter>util\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libpocketsphinx\vector.h">
+      <Filter>util\headers</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libpocketsphinx\acmod.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sphinxbase\agc.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libpocketsphinx\bin_mdef.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sphinxbase\cmn.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\win32\config.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libpocketsphinx\dict.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libpocketsphinx\dict2pid.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sphinxbase\fe.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libsphinxbase\fe\fe_internal.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libsphinxbase\fe\fe_warp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libsphinxbase\fe\fe_warp_affine.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libsphinxbase\fe\fe_warp_inverse_linear.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libsphinxbase\fe\fe_warp_piecewise_linear.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sphinxbase\feat.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libpocketsphinx\fsg_history.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libpocketsphinx\fsg_lextree.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sphinxbase\fsg_model.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libpocketsphinx\fsg_search_internal.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\fsg_set.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libpocketsphinx\hmm.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sphinxbase\jsgf.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libsphinxbase\lm\jsgf_internal.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libsphinxbase\lm\jsgf_parser.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libsphinxbase\lm\jsgf_scanner.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libsphinxbase\lm\lm3g_model.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libpocketsphinx\mdef.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libpocketsphinx\ms_gauden.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libpocketsphinx\ms_mgau.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libpocketsphinx\ms_senone.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sphinxbase\ngram_model.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libsphinxbase\lm\ngram_model_arpa.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libsphinxbase\lm\ngram_model_dmp.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libsphinxbase\lm\ngram_model_internal.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libsphinxbase\lm\ngram_model_set.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libpocketsphinx\ngram_search.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libpocketsphinx\ngram_search_fwdflat.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libpocketsphinx\ngram_search_fwdtree.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libpocketsphinx\phone_loop_search.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\pocketsphinx.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\pocketsphinx_export.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ps_lattice.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libpocketsphinx\ps_lattice_internal.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\ps_mllr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libpocketsphinx\ptm_mgau.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libpocketsphinx\s2_semi_mgau.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sphinxbase\sphinxbase_export_hdr.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="src\libpocketsphinx\tied_mgau_common.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\sphinxbase\yin.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="app.rc">
+      <Filter>资源文件</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="PocketSphinxCPP.cpp">
+      <Filter>CLR</Filter>
+    </ClCompile>
+    <ClCompile Include="AssemblyInfo.cpp">
+      <Filter>CLR</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>CLR</Filter>
+    </ClCompile>
+    <ClCompile Include="tlibc\alloc.cpp">
+      <Filter>tlibc</Filter>
+    </ClCompile>
+    <ClCompile Include="tlibc\atol.cpp">
+      <Filter>tlibc</Filter>
+    </ClCompile>
+    <ClCompile Include="tlibc\file.cpp">
+      <Filter>tlibc</Filter>
+    </ClCompile>
+    <ClCompile Include="tlibc\initterm.cpp">
+      <Filter>tlibc</Filter>
+    </ClCompile>
+    <ClCompile Include="tlibc\math.cpp">
+      <Filter>tlibc</Filter>
+    </ClCompile>
+    <ClCompile Include="tlibc\memory.cpp">
+      <Filter>tlibc</Filter>
+    </ClCompile>
+    <ClCompile Include="tlibc\qsort.cpp">
+      <Filter>tlibc</Filter>
+    </ClCompile>
+    <ClCompile Include="tlibc\string.cpp">
+      <Filter>tlibc</Filter>
+    </ClCompile>
+    <ClCompile Include="tlibc\struplwr.cpp">
+      <Filter>tlibc</Filter>
+    </ClCompile>
+    <ClCompile Include="tlibc\isctype.cpp">
+      <Filter>tlibc</Filter>
+    </ClCompile>
+    <ClCompile Include="util.cpp">
+      <Filter>tlibc</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\util\bio.cpp">
+      <Filter>util\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\util\bitvec.cpp">
+      <Filter>util\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libpocketsphinx\blkarray_list.cpp">
+      <Filter>util\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\util\case.cpp">
+      <Filter>util\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\util\ckd_alloc.cpp">
+      <Filter>util\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\util\cmd_ln.cpp">
+      <Filter>util\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\util\filename.cpp">
+      <Filter>util\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\fe\fixlog.cpp">
+      <Filter>util\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\util\genrand.cpp">
+      <Filter>util\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\util\glist.cpp">
+      <Filter>util\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\util\hash_table.cpp">
+      <Filter>util\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\util\heap.cpp">
+      <Filter>util\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\util\huff_code.cpp">
+      <Filter>util\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\util\info.cpp">
+      <Filter>util\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\util\listelem_alloc.cpp">
+      <Filter>util\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\util\logmath.cpp">
+      <Filter>util\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\util\mmio.cpp">
+      <Filter>util\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\util\pio.cpp">
+      <Filter>util\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\util\strfuncs.cpp">
+      <Filter>util\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\util\profile.cpp">
+      <Filter>util\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libpocketsphinx\tmat.cpp">
+      <Filter>util\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libpocketsphinx\vector.cpp">
+      <Filter>util\sources</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libpocketsphinx\acmod.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\feat\agc.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libpocketsphinx\bin_mdef.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\feat\cmn.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\feat\cmn_prior.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libpocketsphinx\dict.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libpocketsphinx\dict2pid.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\fe\fe_interface.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\fe\fe_sigproc.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\fe\fe_warp.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\fe\fe_warp_affine.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\fe\fe_warp_inverse_linear.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\fe\fe_warp_piecewise_linear.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\feat\feat.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libpocketsphinx\fsg_history.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libpocketsphinx\fsg_lextree.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\lm\fsg_model.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libpocketsphinx\fsg_search.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libpocketsphinx\hmm.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\lm\jsgf.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\lm\jsgf_parser.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\lm\jsgf_scanner.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\feat\lda.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\lm\lm3g_model.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libpocketsphinx\mdef.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libpocketsphinx\ms_gauden.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libpocketsphinx\ms_mgau.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libpocketsphinx\ms_senone.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\lm\ngram_model.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\lm\ngram_model_dmp.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\lm\ngram_model_set.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libpocketsphinx\ngram_search.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libpocketsphinx\ngram_search_fwdflat.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libpocketsphinx\ngram_search_fwdtree.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libpocketsphinx\phone_loop_search.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libpocketsphinx\pocketsphinx.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libpocketsphinx\ps_lattice.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libpocketsphinx\ps_mllr.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libpocketsphinx\ptm_mgau.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libpocketsphinx\s2_semi_mgau.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="src\libsphinxbase\fe\yin.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="app.ico">
+      <Filter>资源文件</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

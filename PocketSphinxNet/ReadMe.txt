@@ -1,0 +1,1 @@
+﻿$(VCInstallDir)include;$(VCInstallDir)atlmfc\include;$(WindowsSDK_IncludePath);
