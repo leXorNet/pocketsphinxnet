@@ -64,9 +64,9 @@ int strnicmp(const char *s1, const char *s2, size_t n)
 	int l1 = s1!=0 ? strlen(s1) : 0;
 	int l2 = s2!=0 ? strlen(s2) : 0;
 
-	int k = Math::Min(l1,l2);
+	int k = l1>l2? l2:l1;
 
-	k = Math::Min(k,(int)n);
+	k = k>n? n : k;
 
 	String^ ws1 = s1!=0 ? gcnew String(s1,0,k) : nullptr;
 	String^ ws2 = s2!=0 ? gcnew String(s2,0,k) : nullptr;
@@ -166,14 +166,11 @@ int strcmp(const char *s1, const char *s2)
 }
 size_t strlen(const char *str)
 {
-	String^ ws1 = str!=0 ? gcnew String(str) : nullptr;
+	const char *s;
 
-	if(ws1!=nullptr)
-	{
-		return ws1->Length;
-	}
-	return 0 ;
-		;
+	for (s = str; *s; ++s);
+
+	return (s - str);
 }
 
 char *strcpy(char *dest, const char *src)
