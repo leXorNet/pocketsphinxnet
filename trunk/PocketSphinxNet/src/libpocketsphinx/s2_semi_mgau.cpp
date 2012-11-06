@@ -1289,6 +1289,9 @@ s2_semi_mgau_init(acmod_t *acmod)
                 s->n_feat, feat_dimension1(acmod->fcb));
         goto error_out;
     }
+
+
+	//NOTICE:BIG_TODO:FIXME
     for (i = 0; i < s->n_feat; ++i) {
         if (s->veclen[i] != feat_dimension2(acmod->fcb, i)) {
             E_ERROR("Dimension of stream %d does not match: %d != %d\n",
@@ -1296,6 +1299,7 @@ s2_semi_mgau_init(acmod_t *acmod)
             goto error_out;
         }
     }
+
     s->n_density = s->g->n_density;
     /* Read mixture weights */
     if ((sendump_path = cmd_ln_str_r(s->config, "-sendump"))) {
