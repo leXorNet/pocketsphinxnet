@@ -139,28 +139,28 @@ namespace PocketSphinxNet
 			}
 			return found;
 		}
+		//Object^ Access(String^ name)
+		//{
+		//	Object^ found = nullptr;
+		//	if(this->cmd!=0 && name!=nullptr)
+		//	{
+		//		IntPtr str = Marshal::StringToHGlobalAnsi(name);
 
-		Object^ Access(String^ name)
-		{
-			Object^ found = nullptr;
-			if(this->cmd!=0 && name!=nullptr)
-			{
-				IntPtr str = Marshal::StringToHGlobalAnsi(name);
+		//		if(str!=IntPtr::Zero)
+		//		{
+		//			anytype_t* arg =cmd_ln_access_r(this->cmd,(char*) str.ToPointer());
 
-				if(str!=IntPtr::Zero)
-				{
-					anytype_t* arg =cmd_ln_access_r(this->cmd,(char*) str.ToPointer());
+		//			if(arg!=0)
+		//			{
+		//			
+		//				//TODO: conver to object
+		//			}
 
-					if(arg!=0)
-					{
-						//TODO: conver to object
-					}
-
-				}
-				Marshal::FreeHGlobal(str);
-			}
-			return found;
-		}
+		//		}
+		//		Marshal::FreeHGlobal(str);
+		//	}
+		//	return found;
+		//}
 
 		String^ GetString(String^ name)
 		{

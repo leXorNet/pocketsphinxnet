@@ -885,40 +885,31 @@ cmd_ln_init(cmd_ln_t *inout_cmdln, const arg_t *defn, int32 strict, ...)
 cmd_ln_t *
 cmd_ln_init(cmd_ln_t *inout_cmdln, const arg_t *defn, int32 strict)
 {
-    //const char *arg, *val;
-    char **f_argv;
-    int32 f_argc;
-#if 0
-    va_list args;
-    va_start(args, strict);
-    f_argc = 0;
-    while ((arg = va_arg(args, const char *))) {
-        ++f_argc;
-        val = va_arg(args, const char*);
-        if (val == 0) {
-            E_ERROR("Number of arguments must be even!\n");
-            return 0;
-        }
-        ++f_argc;
-    }
-    va_end(args);
+    char **f_argv =0;
+    int32 f_argc = 0;
+
+	arg_t* pdefn = (arg_t*)defn;
+
+	while(pdefn!=0 && pdefn->name!=0)
+	{
+		f_argc ++;
+
+		pdefn ++;
+
+	}
 
     /* Now allocate f_argv */
-    f_argv = (char**)ckd_calloc(f_argc, sizeof(*f_argv));
-    va_start(args, strict);
-    f_argc = 0;
-    while ((arg = va_arg(args, const char *))) {
-        f_argv[f_argc] = ckd_salloc(arg);
-        ++f_argc;
-        val = va_arg(args, const char*);
-        f_argv[f_argc] = ckd_salloc(val);
-        ++f_argc;
-    }
-    va_end(args);
-#endif
-	f_argc = 0;
-	f_argv = 0;
-    return parse_options(inout_cmdln, defn, f_argc, f_argv, strict);
+    f_argv = (char**)ckd_calloc(f_argc*2, sizeof(*f_argv));
+   
+
+	for(int i = 0;i<f_argc;i++)
+	{
+		f_argv[2*i] = ckd_salloc(defn[i].name);
+		f_argv[2*i+1] = defn[i].deflt!=0 ? ckd_salloc(defn[i].deflt) : 0;
+	}
+
+;
+    return parse_options(inout_cmdln, defn, f_argc*2, f_argv, strict);
 }
 
 #endif
