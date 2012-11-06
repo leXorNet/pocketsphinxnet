@@ -23,7 +23,7 @@ namespace PocketSphinxSharp
     #region Args
     protected ArgStruct[] DefaultArgs = new ArgStruct[] 
       {
-
+ 
         new ArgStruct("-logspec", ArgType._ARG_BOOLEAN, "no", null)  ,
         new ArgStruct("-smoothspec", ArgType._ARG_BOOLEAN, "no", null)  ,
         new ArgStruct("-transform", ArgType._ARG_STRING, "legacy", null)  ,
@@ -47,8 +47,6 @@ namespace PocketSphinxSharp
         new ArgStruct("-seed", ArgType._ARG_INT32, "-1", null)  ,
         new ArgStruct("-remove_dc", ArgType._ARG_BOOLEAN, "no", null)  ,
         new ArgStruct("-verbose", ArgType._ARG_BOOLEAN, "no", null)  ,
-
-
 
         new ArgStruct("-feat", ArgType._ARG_STRING, "1s_c_d_dd", null)  ,
         new ArgStruct("-ceplen", ArgType._ARG_INT32, "13", null)  ,
@@ -153,8 +151,14 @@ namespace PocketSphinxSharp
     {
       CommandLine cl = new CommandLine();
 
-      if (cl.Init(DefaultArgs,false))
+      if (cl.Init(false, 
+        "-hmm", "model/hmm/en_US/hub4wsj_sc_8k",
+        "-lm","model/lm/en/turtle.DMP",
+        "-dict","model/lm/en/turtle.dic"
+        ))
       {
+        //int t = cl.GetInt("-frate");
+
         if (this.recoder.Open())
         {
           if (engine.Create(cl))

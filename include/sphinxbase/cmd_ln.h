@@ -206,7 +206,7 @@ typedef struct cmd_ln_s cmd_ln_t;
 SPHINXBASE_EXPORT
 cmd_ln_t *cmd_ln_init(cmd_ln_t *inout_cmdln, arg_t const *defn, int32 strict, ...);
 #else
-cmd_ln_t *cmd_ln_init(cmd_ln_t *inout_cmdln, arg_t const *defn, int32 strict);
+cmd_ln_t *cmd_ln_init(cmd_ln_t *inout_cmdln, arg_t const *defn, int32 strict, ... array<Object^>^ parameters);
 #endif
 /**
  * Retain ownership of a command-line argument set.

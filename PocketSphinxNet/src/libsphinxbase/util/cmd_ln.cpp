@@ -470,6 +470,7 @@ cmd_ln_val_init(int t, const char *str)
 #ifndef POCKETSPHINX_NET
             if (sscanf(e_str, "%ld", &val.i) != 1)
                 valid = 0;
+#else
 			//long is 32 or 64?
 			if(sizeof(long) == IntPtr::Size)
 			{
@@ -679,7 +680,7 @@ cmd_ln_parse_r(cmd_ln_t *inout_cmdln, const arg_t * defn, int32 argc, char *argv
         cmdln = inout_cmdln;
 
     /* Build a hash table for argument definitions */
-    defidx = hash_table_new(50, 0);
+    defidx = hash_table_new(200, 0);
     if (defn) {
         for (n = 0; defn[n].name; n++) {
             void *v;
@@ -883,33 +884,36 @@ cmd_ln_init(cmd_ln_t *inout_cmdln, const arg_t *defn, int32 strict, ...)
 }
 #else
 cmd_ln_t *
-cmd_ln_init(cmd_ln_t *inout_cmdln, const arg_t *defn, int32 strict)
+cmd_ln_init(cmd_ln_t *inout_cmdln, const arg_t *defn, int32 strict,... array<Object^>^ parameters)
 {
-    char **f_argv =0;
-    int32 f_argc = 0;
+    char **f_argv;
+    int32 f_argc;
 
-	arg_t* pdefn = (arg_t*)defn;
-
-	while(pdefn!=0 && pdefn->name!=0)
+	if(parameters!=nullptr && parameters->Length%2==0)
 	{
-		f_argc ++;
-
-		pdefn ++;
+		f_argc = parameters->Length;
+	}
+	else
+	{
+        E_ERROR("Number of arguments must be even!\n");
+        return 0;
 
 	}
+
+
 
     /* Now allocate f_argv */
-    f_argv = (char**)ckd_calloc(f_argc*2, sizeof(*f_argv));
-   
+    f_argv = (char**)ckd_calloc(f_argc, sizeof(*f_argv));
 
-	for(int i = 0;i<f_argc;i++)
+	for (int i = 0;i<parameters->Length;i+=2)
 	{
-		f_argv[2*i] = ckd_salloc(defn[i].name);
-		f_argv[2*i+1] = defn[i].deflt!=0 ? ckd_salloc(defn[i].deflt) : 0;
-	}
+		f_argv[i] = (char*) Marshal::StringToHGlobalAnsi(parameters[i]!=nullptr ? parameters[i]->ToString() : String::Empty).ToPointer();
+      
+        f_argv[i+1] = (char*) Marshal::StringToHGlobalAnsi(parameters[i+1]!=nullptr ? parameters[i+1]->ToString(): String::Empty).ToPointer();
+    }
+       
+	return parse_options(inout_cmdln, defn, f_argc, f_argv, strict);
 
-;
-    return parse_options(inout_cmdln, defn, f_argc*2, f_argv, strict);
 }
 
 #endif
