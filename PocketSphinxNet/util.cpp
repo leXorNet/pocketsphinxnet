@@ -114,7 +114,16 @@ int net_sscanf_word(const char* src, char* buffer, int* length)
 	if(src!=0)
 	{
 		int len = strlen(src);
-		for(int i = 0;i<len;i++)
+		int i = 0;
+		for(i = 0;i<len;i++)
+		{
+			if(!isspace(src[i]))
+			{
+				break;
+			}
+		}
+		int t = 0;
+		for(;i<len;i++)
 		{
 			char c = src[i];
 
@@ -123,13 +132,13 @@ int net_sscanf_word(const char* src, char* buffer, int* length)
 				if(length!=0)
 				{
 					*length = i;
-					buffer[i] = '\0';
+					buffer[t] = '\0';
 				}
 				return 1;
 			}
 			else
 			{
-				buffer[i] = c;
+				buffer[t++] = c;
 			}
 
 		}
@@ -145,7 +154,8 @@ int net_sscanf_int(const char* src, int* val, int* length)
 		char* buffer = (char*)calloc(len+1,sizeof(char));
 		if(buffer!=0)
 		{
-			for(int i = 0;i<len;i++)
+			int i = 0;
+			for(i = 0;i<len;i++)
 			{
 				char c = src[i];
 
@@ -169,6 +179,21 @@ int net_sscanf_int(const char* src, int* val, int* length)
 				}
 
 			}
+			if(i == len)
+			{
+				if(length!=0)
+				{
+					*length = i;
+				}
+
+				if(val!=0)
+				{
+					*val = atoi(buffer);
+				}
+				ret = 1;
+			}
+			
+			free(buffer);
 		}
 	}
 	return ret;

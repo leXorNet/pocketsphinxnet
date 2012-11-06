@@ -246,6 +246,7 @@ bio_readhdr(FILE * fp, char ***argname, char ***argval, int32 * swap)
 #endif
             if (strcmp(word, "endhdr") == 0)
                 break;
+
             if (word[0] == '#') /* Skip comments */
                 continue;
 

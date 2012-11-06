@@ -177,6 +177,7 @@ namespace PocketSphinxSharp
                 int k = 0;
                 while ((k = this.cad.Read(buffer)) == 0)
                 {
+
                 }
 
                 if (engine.StartUtt(null))

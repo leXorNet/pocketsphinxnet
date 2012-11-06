@@ -273,8 +273,10 @@ ad_open_sps_bufsize(int32 sps, int32 bufsize_msec)
     r->n_buf = ((sps * bufsize_msec) / 1000) / WI_BUFSIZE;
     if (r->n_buf < DEFAULT_N_WI_BUF)
         r->n_buf = DEFAULT_N_WI_BUF;
+#if 0
     printf("Allocating %d buffers of %d samples each\n", r->n_buf,
            WI_BUFSIZE);
+#endif
 
     if ((r->wi_buf =
          (ad_wbuf_t *) calloc(r->n_buf, sizeof(ad_wbuf_t))) == NULL) {

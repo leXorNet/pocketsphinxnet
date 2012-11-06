@@ -415,8 +415,10 @@ namespace PocketSphinxNet
 		bool StartUtt(String^ uttid)
 		{
 			bool done = false;
-			if(this->decoder!=0 && uttid!=nullptr)
+			if(this->decoder!=0)
 			{
+				uttid = uttid !=nullptr ? uttid : String::Empty;
+
 				IntPtr str = Marshal::StringToHGlobalAnsi(uttid);
 				// use str here for the ofstream filename
 				if(str!=IntPtr::Zero)
