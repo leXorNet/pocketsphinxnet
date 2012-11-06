@@ -12,13 +12,13 @@ namespace PocketSphinxSharp
   {
     PocketSphinx engine = null;
     PocketSphinxAudioRecorder recoder = null;
-    PocketSphinxAudioContinuousProcessor cad = null;
+    PocketSphinxAudioContinuousProcessor cont = null;
 
     public PocketSphinxEntry()
     {
       this.engine = new PocketSphinx();
       this.recoder = new PocketSphinxAudioRecorder();
-      this.cad = new PocketSphinxAudioContinuousProcessor();
+      this.cont = new PocketSphinxAudioContinuousProcessor();
     }
     #region Args
     protected ArgStruct[] DefaultArgs = new ArgStruct[] 
@@ -163,11 +163,11 @@ namespace PocketSphinxSharp
         {
           if (engine.Create(cl))
           {
-            if (cad.Init(recoder))
+            if (cont.Init(recoder))
             {
               recoder.Start();
 
-              cad.Calib();
+              cont.Calib();
 
               bool run = true;
               while (run)
@@ -175,7 +175,7 @@ namespace PocketSphinxSharp
                 short[] buffer = new short[4096];
 
                 int k = 0;
-                while ((k = this.cad.Read(buffer)) == 0)
+                while ((k = this.cont.Read(buffer)) == 0)
                 {
 
                 }
@@ -184,15 +184,13 @@ namespace PocketSphinxSharp
                 {
                   engine.ProcessRaw(buffer, false, false);
 
-                  while ((k = this.cad.Read(buffer)) >= 0)
+                  while ((k = this.cont.Read(buffer)) > 0)
                   {
-
                     this.engine.ProcessRaw(buffer, false, false);
-
                   }
 
                   this.recoder.Stop();
-                  this.cad.Reset();
+                  this.cont.Reset();
                   this.engine.EndUtt();
 
 
@@ -212,7 +210,7 @@ namespace PocketSphinxSharp
               }
 
               this.recoder.Stop();
-              this.cad.Close();
+              this.cont.Close();
             }
             this.engine.Clone();
           }
