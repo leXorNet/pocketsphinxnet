@@ -6,5 +6,6 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <EnableUnmanagedDebugging>true</EnableUnmanagedDebugging>
     <StartArguments>pocketsphinx.args</StartArguments>
+    <StartWorkingDirectory>K:\Working\PocketSphinxNet_Versions\PocketSphinxNet\PocketSphinxSharp\</StartWorkingDirectory>
   </PropertyGroup>
 </Project>

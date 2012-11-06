@@ -180,7 +180,7 @@ char *strcpy(char *dest, const char *src)
 {
 	if(dest!=0 && src!=0)
 	{
-		memcpy(dest,src,sizeof(char*) * strlen(src));
+		memcpy(dest,src,sizeof(char) * strlen(src) + 1);
 	}
 	return dest;
 		;

@@ -675,10 +675,26 @@ using namespace System::Text;
 using namespace System::IO;
 using namespace System::Runtime::InteropServices;
 
+
 struct _FILE : public FILE
 {
-	GCHandle file;
+	void* file;
+
 };
+
+ref class FILEHelper{
+public:
+
+	static void SetHandle(_FILE* file,GCHandle handle){ file->file = (void*) GCHandle::ToIntPtr(handle).ToPointer();}
+
+
+	static void SetStream(_FILE* file,FileStream^ fs){ file->file = (void*) GCHandle::ToIntPtr(GCHandle::Alloc(fs)).ToPointer();}
+
+	static FileStream^ GetFileStream(_FILE* file){return (FileStream^) (GCHandle::FromIntPtr(IntPtr(file->file)).Target);}
+
+	static void FreeStream(_FILE* file){ GCHandle::FromIntPtr(IntPtr(file->file)).Free();}
+};
+
 
 int net_fprintf(FILE* fp,String^ str,... array<Object^>^ args);
 

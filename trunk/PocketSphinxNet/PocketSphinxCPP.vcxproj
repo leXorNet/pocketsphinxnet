@@ -228,6 +228,9 @@
     <ClInclude Include="..\include\sphinxbase\yin.h" />
     <ClInclude Include="..\include\win32\config.h" />
     <ClInclude Include="..\include\win32\sphinx_config.h" />
+    <ClInclude Include="Agc.h" />
+    <ClInclude Include="Cmn.h" />
+    <ClInclude Include="PitchEstimator.h" />
     <ClInclude Include="src\libsphinxbase\fe\fe_internal.h" />
     <ClInclude Include="src\libsphinxbase\fe\fe_warp.h" />
     <ClInclude Include="src\libsphinxbase\fe\fe_warp_affine.h" />
@@ -293,6 +296,8 @@
     <ResourceCompile Include="app.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ArgStruct.cpp" />
+    <ClCompile Include="Lattice.cpp" />
     <ClCompile Include="src\libsphinxbase\feat\agc.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pure</CompileAsManaged>
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pure</CompileAsManaged>

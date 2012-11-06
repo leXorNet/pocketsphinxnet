@@ -9,7 +9,7 @@ namespace PocketSphinxNet
 {
 	public ref class FeatureTrans
 	{
-	protected:
+	internal:
 
 		ps_mllr_t* mllr;
 
@@ -37,7 +37,7 @@ namespace PocketSphinxNet
 		}
 
 	public:
-		bool Init(String^ file)
+		bool Read(String^ file)
 		{
 			bool done = false;
 			if(this->mllr!=0 && file!=nullptr)
@@ -46,7 +46,7 @@ namespace PocketSphinxNet
 				// use str here for the ofstream filename
 				if(str!=IntPtr::Zero)
 				{
-					done = (this->mllr = 0/* ps_mllr_read((const char*)(void*)str)*/)!=0;
+					done = (this->mllr = ps_mllr_read((const char*)(void*)str))!=0;
 				}
 				Marshal::FreeHGlobal(str);
 			}
@@ -54,9 +54,14 @@ namespace PocketSphinxNet
 		}
 		FeatureTrans^ Clone()
 		{
-			return this->mllr!=0 ? gcnew
-				FeatureTrans(ps_mllr_retain(this->mllr))
-				: nullptr;
+			if(this->mllr!=0)
+			{
+				ps_mllr_t* p = ps_mllr_retain(this->mllr);
+
+				return p!=0 ? gcnew FeatureTrans(p) : nullptr;
+				
+			}
+			return nullptr;
 		}
 		bool Free()
 		{

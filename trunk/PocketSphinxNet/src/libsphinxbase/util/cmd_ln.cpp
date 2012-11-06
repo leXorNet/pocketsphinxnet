@@ -470,7 +470,6 @@ cmd_ln_val_init(int t, const char *str)
 #ifndef POCKETSPHINX_NET
             if (sscanf(e_str, "%ld", &val.i) != 1)
                 valid = 0;
-#else
 			//long is 32 or 64?
 			if(sizeof(long) == IntPtr::Size)
 			{
