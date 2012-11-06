@@ -9,7 +9,7 @@ namespace PocketSphinxNet
 {
 	public ref class FrontEnd
 	{
-	protected:
+	internal:
 
 		fe_t* fe;
 

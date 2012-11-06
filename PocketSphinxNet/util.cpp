@@ -10,7 +10,7 @@ int net_fprintf(FILE* fp,String^ str,... array<Object^>^ args)
 	{
 		String^ result = String::Format(str,args);
 
-		FileStream^ fs = (FileStream^)(((_FILE*)fp)->file.Target);
+		FileStream^ fs = FILEHelper::GetFileStream((_FILE*)fp);
 
 		if(fs!=nullptr)
 		{

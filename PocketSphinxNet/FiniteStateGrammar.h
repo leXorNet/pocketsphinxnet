@@ -8,7 +8,7 @@ namespace PocketSphinxNet
 {
 	public ref class FiniteStateGrammar
 	{
-	protected:
+	internal:
 
 		fsg_set_t* fsg;
 

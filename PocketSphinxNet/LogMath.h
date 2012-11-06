@@ -8,7 +8,7 @@ namespace PocketSphinxNet
 {
 	public ref class LogMath
 	{
-	protected:
+	internal:
 
 		logmath_t* logmath;
 

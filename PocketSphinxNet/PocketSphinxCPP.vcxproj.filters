@@ -313,6 +313,15 @@
     <ClInclude Include="..\include\sphinxbase\yin.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="PitchEstimator.h">
+      <Filter>CLR</Filter>
+    </ClInclude>
+    <ClInclude Include="Agc.h">
+      <Filter>CLR</Filter>
+    </ClInclude>
+    <ClInclude Include="Cmn.h">
+      <Filter>CLR</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="app.rc">
@@ -550,6 +559,12 @@
     </ClCompile>
     <ClCompile Include="src\libsphinxbase\fe\yin.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Lattice.cpp">
+      <Filter>CLR</Filter>
+    </ClCompile>
+    <ClCompile Include="ArgStruct.cpp">
+      <Filter>CLR</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

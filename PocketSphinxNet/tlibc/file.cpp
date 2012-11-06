@@ -125,6 +125,8 @@ HANDLE _get_osfhandle(int i)
 return (HANDLE)i;		// FIXME:  This doesn't work under Win64
 }*/
 
+
+
 FILE *fopen(const char *path, const char *attrs)
 {
 	DWORD access, disp;
@@ -426,8 +428,9 @@ int fgetc(FILE *s)
 #else
 #include "libct.h"
 
-
 using namespace System::Runtime::InteropServices;
+
+
 #endif
 
 int unlink( const char * pathname )
@@ -475,35 +478,37 @@ FILE *fopen(const char *path, const char *attrs)
 		if (strchr(attrs, '+'))
 		{
 			acc = FileAccess::ReadWrite;
-		}
-		else
-		{
-			acc = FileAccess::Write;
 
 		}
-
-		FileStream^ fs = gcnew FileStream(gcnew String(path),mode,acc);
-		if(fs!=nullptr)
+		try
 		{
-			_FILE *file = (_FILE*)malloc(sizeof( _FILE));
+			FileStream^ fs = gcnew FileStream(gcnew String(path),mode,acc);
+			if(fs!=nullptr)
+			{
+				_FILE *file = (_FILE*)malloc(sizeof( _FILE));
 
-			memset(file, 0, sizeof(_FILE));
+				memset(file, 0, sizeof(_FILE));
 
-			file->file =  GCHandle::Alloc(fs, GCHandleType::Normal);
+				FILEHelper::SetStream(file,fs);
 
-			return file;
+				return file;
+			}
+		}
+		catch(Exception^ e)
+		{
+
 		}
 
 
 	}
 	return 0;
 }
-int getc(FILE *stream)
+int getc(FILE *fp)
 {
 	int r = 0;
-	if(stream!=0)
+	if(fp!=0)
 	{
-		FileStream^ fs = (FileStream^)(((_FILE*)stream)->file.Target);
+		FileStream^ fs = FILEHelper::GetFileStream((_FILE*)fp);
 
 		if(fs!=nullptr)
 		{
@@ -519,12 +524,12 @@ int fgetc(FILE *s){
 
 int fputc(
 	int c,
-	FILE *stream 
+	FILE *fp 
 	)
 {
-	if(stream!=0)
+	if(fp!=0)
 	{
-		FileStream^ fs = (FileStream^)(((_FILE*)stream)->file.Target);
+		FileStream^ fs = FILEHelper::GetFileStream((_FILE*)fp);
 		if(fs!=nullptr)
 		{
 			fs->WriteByte((unsigned char)c);
@@ -535,12 +540,12 @@ int fputc(
 }
 int ungetc(
 	int c,
-	FILE *stream 
+	FILE *fp 
 	)
 {
-	if(stream!=0)
+	if(fp!=0)
 	{
-		FileStream^ fs = (FileStream^)(((_FILE*)stream)->file.Target);
+		FileStream^ fs = FILEHelper::GetFileStream((_FILE*)fp);
 		if(fs!=nullptr)
 		{
 			if(fs->Position>0)
@@ -554,11 +559,11 @@ int ungetc(
 	return EOF;
 }
 
-void rewind(FILE *stream)
+void rewind(FILE *fp)
 {
-	if(stream!=0)
+	if(fp!=0)
 	{
-		FileStream^ fs = (FileStream^)(((_FILE*)stream)->file.Target);
+		FileStream^ fs = FILEHelper::GetFileStream((_FILE*)fp);
 		if(fs!=nullptr)
 		{
 			fs->Seek(0,SeekOrigin::Begin);
@@ -570,11 +575,11 @@ void rewind(FILE *stream)
 int fclose(FILE *fp){
 	if(fp!=0)
 	{
-		FileStream^ fs = (FileStream^)(((_FILE*)fp)->file.Target);
+		FileStream^ fs = FILEHelper::GetFileStream((_FILE*)fp);
 		if(fs!=nullptr)
 		{
 			fs->Close();
-			((_FILE*)fp)->file.Free();
+			FILEHelper::FreeStream((_FILE*)fp);
 
 		}
 		free(fp);
@@ -585,7 +590,7 @@ int fclose(FILE *fp){
 int fflush(FILE *fp){
 	if(fp!=0)
 	{
-		FileStream^ fs = (FileStream^)(((_FILE*)fp)->file.Target);
+		FileStream^ fs = FILEHelper::GetFileStream((_FILE*)fp);
 		if(fs!=nullptr)
 		{
 			fs->Flush();
@@ -597,7 +602,7 @@ int fflush(FILE *fp){
 int feof(FILE *fp){
 	if(fp!=0)
 	{
-		FileStream^ fs = (FileStream^)(((_FILE*)fp)->file.Target);
+		FileStream^ fs = FILEHelper::GetFileStream((_FILE*)fp);
 		if(fs!=nullptr)
 		{
 			//NOTICE: check
@@ -609,7 +614,7 @@ int feof(FILE *fp){
 int fseek(FILE *fp, long long offset, int origin){
 	if(fp!=0)
 	{
-		FileStream^ fs = (FileStream^)(((_FILE*)fp)->file.Target);
+		FileStream^ fs = FILEHelper::GetFileStream((_FILE*)fp);
 		if(fs!=nullptr)
 		{
 			SeekOrigin so =SeekOrigin::Begin;
@@ -635,7 +640,7 @@ int fseek(FILE *fp, long long offset, int origin){
 long long ftell(FILE *fp){
 	if(fp!=0)
 	{
-		FileStream^ fs = (FileStream^)(((_FILE*)fp)->file.Target);
+		FileStream^ fs = FILEHelper::GetFileStream((_FILE*)fp);
 		if(fs!=nullptr)
 		{
 			//NOTICE:check
@@ -651,7 +656,7 @@ size_t fread(void *buffer, size_t size, size_t count, FILE *fp){
 	{
 		size_t n = size*count;
 
-		FileStream^ fs = (FileStream^)(((_FILE*)fp)->file.Target);
+		FileStream^ fs = FILEHelper::GetFileStream((_FILE*)fp);
 		if(fs!=nullptr && n>0)
 		{
 
@@ -673,7 +678,7 @@ size_t fwrite(const void *buffer, size_t size, size_t count, FILE *fp){
 	{
 		size_t n = size*count;
 
-		FileStream^ fs = (FileStream^)(((_FILE*)fp)->file.Target);
+		FileStream^ fs = FILEHelper::GetFileStream((_FILE*)fp);
 		if(fs!=nullptr && n>0)
 		{
 
@@ -720,14 +725,14 @@ char *fgets(char *str, int n, FILE *fp){
 }
 
 int ferror( 
-	FILE *stream 
+	FILE *fp 
 	)
 {
 	//DO NOTHING
 	return 0;
 }
 int clearerr( 
-	FILE *stream 
+	FILE *fp 
 	)
 {
 	//DO NOTHING

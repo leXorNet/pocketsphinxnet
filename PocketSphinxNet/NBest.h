@@ -11,7 +11,7 @@ namespace PocketSphinxNet
 {
 	public ref class NBest
 	{
-	protected:
+	internal:
 
 		ps_nbest_t* nb;
 

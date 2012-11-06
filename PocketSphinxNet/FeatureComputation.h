@@ -10,7 +10,7 @@ namespace PocketSphinxNet
 
 	public ref class FeatureComputation
 	{
-	protected:
+	internal:
 
 		feat_t* feat;
 

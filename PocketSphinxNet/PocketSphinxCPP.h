@@ -12,6 +12,9 @@
 #include "Lattice.h"
 #include "Segment.h"
 #include "NBest.h"
+#include "PitchEstimator.h"
+#include "Agc.h"
+#include "Cmn.h"
 
 using namespace System;
 using namespace System::Collections::Generic;
@@ -22,7 +25,7 @@ namespace PocketSphinxNet
 
 	public ref class PocketSphinx
 	{
-	protected:
+	 internal:
 		ps_decoder_t* decoder;
 
 
@@ -41,7 +44,10 @@ namespace PocketSphinxNet
 		}
 
 	internal:
-
+		operator ps_decoder_t* ()
+		{
+			return this->decoder;
+		}
 		PocketSphinx(ps_decoder_t* decoder)
 		{
 			this->decoder = decoder;
@@ -73,13 +79,13 @@ namespace PocketSphinxNet
 			return nullptr;
 		}
 
-		List<ArgStruct>^ GetArgs()
+		List<ArgStruct^>^ GetArgs()
 		{
-			List<ArgStruct>^ Args  = gcnew List<ArgStruct>(ps_args_size());
+			List<ArgStruct^>^ Args  = gcnew List<ArgStruct^>(ps_args_size());
 
 			for(int i = 0;i<Args->Count;i++)
 			{
-				Args->Add(ArgStruct((ps_args()+i)));
+				Args->Add(gcnew ArgStruct((ps_args()+i)));
 			}
 			return Args;
 		}

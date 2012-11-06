@@ -8,7 +8,7 @@ namespace PocketSphinxNet
 {
 	public ref class NGramModel
 	{
-	protected:
+	internal:
 
 		ngram_model_t* model;
 
