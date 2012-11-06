@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="pocketsphinx.args" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PocketSphinxNet\PocketSphinxCPP.vcxproj">

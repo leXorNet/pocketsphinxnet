@@ -63,7 +63,6 @@ namespace PocketSphinxSharp
         new ArgStruct("-svspec", ArgType._ARG_STRING, null, null)  ,
 
 
-        new ArgStruct("-hmm", ArgType._ARG_STRING, null, null)  ,
         new ArgStruct("-featparams", ArgType._ARG_STRING, null, null)  ,
         new ArgStruct("-mdef", ArgType._ARG_STRING,null, null)  ,
         new ArgStruct("-senmgau", ArgType._ARG_STRING,null, null)  ,
@@ -123,7 +122,6 @@ namespace PocketSphinxSharp
         new ArgStruct("-fsgusefiller", ArgType._ARG_BOOLEAN, "yes", null)  ,
 
 
-        new ArgStruct("-lm", ArgType._ARG_STRING, null, null)  ,
         new ArgStruct("-lmctl", ArgType._ARG_STRING, null, null)  ,
         new ArgStruct("-lw", ArgType._ARG_FLOAT32, "6.5", null)  ,
         new ArgStruct("-fwdflatlw", ArgType._ARG_FLOAT32, "8.5", null)  ,
@@ -138,19 +136,16 @@ namespace PocketSphinxSharp
         new ArgStruct("-bghist", ArgType._ARG_BOOLEAN, "no", null)  ,
         new ArgStruct("-lextreedump", ArgType._ARG_INT32, "0", null)  ,
 
-        new ArgStruct("-dict", ArgType._REQARG_STRING, null, null)  ,
         new ArgStruct("-fdict", ArgType._ARG_STRING, null, null)  ,
         new ArgStruct("-dictcase", ArgType._ARG_BOOLEAN, "no", null)  ,
         new ArgStruct("-maxnewoov", ArgType._ARG_INT32, "20", null)  ,
         new ArgStruct("-usewdphones", ArgType._ARG_BOOLEAN, "no", null)  ,
 
-        new ArgStruct("-argfile", ArgType._ARG_STRING, null, null)  ,
-        new ArgStruct("-adcdev", ArgType._ARG_STRING, null, null)  ,
-        new ArgStruct("-infile", ArgType._ARG_STRING, null, null)  ,
-        new ArgStruct("-time", ArgType._ARG_STRING, "no", null)  ,
-        new ArgStruct("-dict", ArgType._ARG_STRING, null, null)  
       
+        new ArgStruct("-lm", ArgType._ARG_STRING, "model/lm/en/turtle.DMP", null)  ,
+        new ArgStruct("-hmm", ArgType._ARG_STRING, "model/hmm/en_US/hub4wsj_sc_8k", null)  ,
       
+        new ArgStruct("-dict", ArgType._REQARG_STRING, "model/lm/en/turtle.dic", null)  ,
       };
     #endregion
 
@@ -158,7 +153,7 @@ namespace PocketSphinxSharp
     {
       CommandLine cl = new CommandLine();
 
-      if (cl.ParseFile(DefaultArgs, argsfile, false))
+      if (cl.Init(DefaultArgs,false))
       {
         if (this.recoder.Open())
         {
