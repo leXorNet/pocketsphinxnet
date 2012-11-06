@@ -667,7 +667,7 @@ size_t fread(void *buffer, size_t size, size_t count, FILE *fp){
 			{
 				Marshal::Copy(_buffer,0,IntPtr(buffer),c);
 			}
-			return c;
+			return (c/size);
 		}
 
 	}
@@ -688,7 +688,7 @@ size_t fwrite(const void *buffer, size_t size, size_t count, FILE *fp){
 
 			fs->Write(_buffer,0,n);
 
-			return n;
+			return (n/size);
 		}
 
 	}

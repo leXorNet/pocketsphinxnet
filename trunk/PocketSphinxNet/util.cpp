@@ -123,6 +123,7 @@ int net_sscanf_word(const char* src, char* buffer, int* length)
 				if(length!=0)
 				{
 					*length = i;
+					buffer[i] = '\0';
 				}
 				return 1;
 			}

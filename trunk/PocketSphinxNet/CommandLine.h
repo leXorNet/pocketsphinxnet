@@ -8,6 +8,11 @@ using namespace System::Collections::Generic;
 
 using namespace System::Runtime::InteropServices;
 
+
+
+const arg_t* GetDefs();
+
+
 namespace PocketSphinxNet
 {
 	public ref class CommandLine
@@ -19,6 +24,7 @@ namespace PocketSphinxNet
 			return gcnew CommandLine(cmd_ln_get());
 		}
 	internal:
+
 
 		cmd_ln_t* cmd ;
 
@@ -39,72 +45,72 @@ namespace PocketSphinxNet
 		{
 			return ((this->cmd = cmd_ln_init(0,0,0))!=0);
 		}
-		bool Init(array<ArgStruct^>^ Args, bool Strict)
+		bool Init(bool Strict, ...array<Object^>^ parameters)
 		{
-			if(Args!=nullptr)
+			if(true)
 			{
-				arg_t* argslist = (arg_t*)malloc(sizeof(arg_t)*(Args->Length + 1));
+				//arg_t* argslist = (arg_t*)malloc(sizeof(arg_t)*(Args->Length + 1));
 
-				if(argslist!=0)
-				{
-					memset(&argslist[Args->Length],0,sizeof(arg_t));
+				//if(argslist!=0)
+				//{
+					//memset(&argslist[Args->Length],0,sizeof(arg_t));
 
-					for(int i = 0;i<Args->Length;i++)
-					{
-						argslist[i] = Args[i]->Generate();
-					}
-
-
-					this->cmd = cmd_ln_init(0, argslist, Strict);
-
-					for(int i = 0;i<Args->Length;i++)
-					{
-						ArgStruct::Release(argslist[i]);
-					}
+					//for(int i = 0;i<Args->Length;i++)
+					//{
+					//	argslist[i] = Args[i]->Generate();
+					//}
 
 
-					free(argslist);
-				}
+					this->cmd = cmd_ln_init(0,  GetDefs(), Strict, parameters);
+
+					//for(int i = 0;i<Args->Length;i++)
+					//{
+					//	ArgStruct::Release(argslist[i]);
+					//}
+
+
+				//	free(argslist);
+				//}
 
 
 			}
 			return this->cmd!=0;
 		}
-		bool ParseFile(array<ArgStruct^>^ Args, String^ file, bool Strict)
+		bool ParseFile( String^ file, bool Strict)
 		{
-			if(Args!=nullptr && file!=nullptr)
+			if(file!=nullptr)
 			{
 				IntPtr str = Marshal::StringToHGlobalAnsi(file);
 
 				if(str!=IntPtr::Zero)
 				{
-					if(Args!=nullptr)
-					{
-						arg_t* argslist = (arg_t*)malloc(sizeof(arg_t)*(Args->Length + 1));
+					//if(Args!=nullptr)
+					//{
+					//	arg_t* argslist = (arg_t*)malloc(sizeof(arg_t)*(Args->Length + 1));
 
-						if(argslist!=0)
-						{
-							memset(&argslist[Args->Length],0,sizeof(arg_t));
+					//	if(argslist!=0)
+					//	{
+					//		memset(&argslist[Args->Length],0,sizeof(arg_t));
 
-							for(int i = 0;i<Args->Length;i++)
-							{
-								argslist[i] = Args[i]->Generate();
-							}
-
-
-							this->cmd = cmd_ln_parse_file_r(0,argslist,(char*) str.ToPointer(),Strict);
-
-							for(int i = 0;i<Args->Length;i++)
-							{
-								ArgStruct::Release(argslist[i]);
-							}
+					//		for(int i = 0;i<Args->Length;i++)
+					//		{
+					//			argslist[i] = Args[i]->Generate();
+					//		}
 
 
-							free(argslist);
-						}
+							this->cmd = cmd_ln_parse_file_r(0, GetDefs(),(char*) str.ToPointer(),Strict);
+
+							//for(int i = 0;i<Args->Length;i++)
+							//{
+							//	ArgStruct::Release(argslist[i]);
+							//}
 
 
-					}
+					//		free(argslist);
+					//	}
+
+
+					//}
 
 				}
 				Marshal::FreeHGlobal(str);

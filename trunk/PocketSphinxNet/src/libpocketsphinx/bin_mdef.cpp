@@ -386,8 +386,12 @@ bin_mdef_read(cmd_ln_t *config, const char *filename)
     /* CI names are first in the file. */
     m->ciname = (char**)ckd_calloc(m->n_ciphone, sizeof(*m->ciname));
 
+#ifndef POCKETSPHINX_NET
     /* Decide whether to read in the whole file or mmap it. */
     do_mmap = config ? cmd_ln_boolean_r(config, "-mmap") : TRUE;
+#else
+	do_mmap = FALSE;
+#endif
     if (swap) {
         E_WARN("-mmap specified, but mdef is other-endian.  Will not memory-map.\n");
         do_mmap = FALSE;
