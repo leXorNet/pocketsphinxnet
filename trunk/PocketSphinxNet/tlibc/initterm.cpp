@@ -91,7 +91,7 @@ using namespace System::Runtime::InteropServices;
 
 time_t time(time_t *timer )
 {
-	return  (System::DateTime::Now -System::DateTime(1970, 1, 1)).TotalSeconds;
+	return  (time_t)(System::DateTime::Now -System::DateTime(1970, 1, 1)).TotalSeconds;
 
 }
 char *getenv( 

@@ -37,10 +37,7 @@ namespace PocketSphinxNet
 
 		~PocketSphinx()
 		{
-			if(this->decoder == 0)
-			{
-				ps_free(this->decoder);
-			}
+			this->Close();
 		}
 
 	internal:
@@ -54,7 +51,17 @@ namespace PocketSphinxNet
 		}
 
 	public:
-
+			
+		bool Close()
+		{
+			bool done = true;
+			if(this->decoder !=0)
+			{
+				done = ps_free(this->decoder) == 0;
+				this->decoder = 0;
+			}
+			return done;
+		}
 
 		bool Create(CommandLine^ Config)
 		{

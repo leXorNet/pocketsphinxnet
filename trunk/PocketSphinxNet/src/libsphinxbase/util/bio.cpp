@@ -591,7 +591,7 @@ bio_read_wavfile(char const *directory,
         E_FATAL_SYSTEM("Failed to open file '%s' for reading", inputfile);
     }
     fseek(uttfp, 0, SEEK_END);
-    n = ftell(uttfp);
+    n = (int32)ftell(uttfp);
     fseek(uttfp, 0, SEEK_SET);
     if (header > 0) {
         if (fseek(uttfp, header, SEEK_SET) < 0) {

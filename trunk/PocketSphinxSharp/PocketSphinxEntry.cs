@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using PocketSphinxNet;
 
@@ -149,6 +150,8 @@ namespace PocketSphinxSharp
 
     public void Work(string argsfile)
     {
+      Console.WriteLine("PocketSphinxNet");
+
       CommandLine cl = new CommandLine();
 
       if (cl.Init(false, 
@@ -157,64 +160,123 @@ namespace PocketSphinxSharp
         "-dict","model/lm/en/turtle.dic"
         ))
       {
-        //int t = cl.GetInt("-frate");
+        Console.WriteLine("Command line parsed.");
 
         if (this.recoder.Open())
         {
+          Console.WriteLine("Recoder is open.");
+
           if (engine.Create(cl))
           {
+            Console.WriteLine("Engine is ready.");
+
             if (cont.Init(recoder))
             {
+              Console.WriteLine("Recoder is started");
+
               recoder.Start();
+
+              Console.WriteLine("Calibaration started.");
 
               cont.Calib();
 
-              bool run = true;
-              while (run)
+              Console.WriteLine("Calibration finished");
+
+              while (true)
               {
                 short[] buffer = new short[4096];
 
                 int k = 0;
+                int rem = 0;
+
+                /* Wait data for next utterance */
+
                 while ((k = this.cont.Read(buffer)) == 0)
                 {
-
+                  Thread.Sleep(100);
                 }
-
+                if (k < 0)
+                {
+                  //Input audio disconnected
+                  break;
+                }
                 if (engine.StartUtt(null))
                 {
+
                   engine.ProcessRaw(buffer, false, false);
 
-                  while ((k = this.cont.Read(buffer)) > 0)
+                  Console.WriteLine("Listening...");
+                  
+                  
+                  DateTime st = DateTime.Now;
+                  DateTime ct = DateTime.Now;
+
+                  while (true)
                   {
-                    this.engine.ProcessRaw(buffer, false, false);
+
+                    k = this.cont.Read(buffer);
+
+                     ct = DateTime.Now;
+
+                    if (k == 0)
+                    {
+                      if (ct - st > TimeSpan.FromSeconds(1))
+                      {
+                        break;
+                      }
+                    }
+
+
+                    rem = this.engine.ProcessRaw(buffer, false, false);
+
+                    if (k == 0 && rem == 0)
+                    {
+                      Thread.Sleep(20);
+                    }
                   }
 
                   this.recoder.Stop();
+
+                  while ((k = this.recoder.Read(buffer)) >= 0) ;
+
+                  Console.WriteLine("Searching for hypothesis...");
+
                   this.cont.Reset();
                   this.engine.EndUtt();
 
-
                   string out_uttid = null;
-
                   string hyp = null;
-                  int score = 0;
 
+                  int score = 0;
 
                   hyp = engine.GetHypothesis(out score, out out_uttid);
 
+                  Console.WriteLine("Hypothesis: \"{0}\",Uttid:\"{1}\",Score:\"{2}\"", hyp, out_uttid, score);
+
                   if (hyp == "goodbye")
                   {
+                    Console.WriteLine("Bye bye!");
+
                     break;
+
                   }
+
+                  if (this.recoder.Start() < 0)
+                  {
+                  }
+
                 }
               }
 
               this.recoder.Stop();
               this.cont.Close();
             }
-            this.engine.Clone();
+
+            this.engine.Close();
+            Console.WriteLine("Engine closed.");
           }
           this.recoder.Close();
+          Console.WriteLine("Recorder closed.");
         }
       }
     }

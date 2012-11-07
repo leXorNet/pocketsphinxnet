@@ -496,7 +496,7 @@ FILE *fopen(const char *path, const char *attrs)
 		}
 		catch(Exception^ e)
 		{
-
+			e=nullptr;
 		}
 
 
