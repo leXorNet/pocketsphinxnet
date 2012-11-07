@@ -72,8 +72,8 @@ namespace PocketSphinxNet
 				if(str!=IntPtr::Zero)
 				{
 					r = ps_lattice_write(this->lattice,(char*)str.ToPointer());
+					Marshal::FreeHGlobal(str);
 				}
-				Marshal::FreeHGlobal(str);
 
 				return r!=0;
 			}
@@ -91,8 +91,8 @@ namespace PocketSphinxNet
 				if(str!=IntPtr::Zero)
 				{
 					r = ps_lattice_write_htk(this->lattice,(char*)str.ToPointer());
+					Marshal::FreeHGlobal(str);
 				}
-				Marshal::FreeHGlobal(str);
 
 				return r!=0;
 			}
