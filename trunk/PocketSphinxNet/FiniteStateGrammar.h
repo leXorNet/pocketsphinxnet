@@ -6,7 +6,7 @@ using namespace System;
 using namespace System::Runtime::InteropServices;
 namespace PocketSphinxNet
 {
-	public ref class FiniteStateGrammar
+	public ref class FiniteStateGrammarSet
 	{
 	internal:
 
@@ -14,18 +14,18 @@ namespace PocketSphinxNet
 
 	public:
 
-		FiniteStateGrammar()
+		FiniteStateGrammarSet()
 		{
 			this->fsg = 0;
 		}
-		~FiniteStateGrammar()
+		~FiniteStateGrammarSet()
 		{
 			this->Free();
 		}
 
 	internal:
 
-		FiniteStateGrammar(fsg_set_t* fsg)
+		FiniteStateGrammarSet(fsg_set_t* fsg)
 		{
 			this->fsg = fsg;
 		}
