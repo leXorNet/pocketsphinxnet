@@ -47,8 +47,8 @@ namespace PocketSphinxNet
 				if(str!=IntPtr::Zero)
 				{
 					done = (this->mllr = ps_mllr_read((const char*)(void*)str))!=0;
+					Marshal::FreeHGlobal(str);
 				}
-				Marshal::FreeHGlobal(str);
 			}
 			return done;
 		}

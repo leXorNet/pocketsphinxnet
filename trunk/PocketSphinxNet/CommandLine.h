@@ -47,34 +47,7 @@ namespace PocketSphinxNet
 		}
 		bool Init(bool Strict, ...array<Object^>^ parameters)
 		{
-			if(true)
-			{
-				//arg_t* argslist = (arg_t*)malloc(sizeof(arg_t)*(Args->Length + 1));
-
-				//if(argslist!=0)
-				//{
-					//memset(&argslist[Args->Length],0,sizeof(arg_t));
-
-					//for(int i = 0;i<Args->Length;i++)
-					//{
-					//	argslist[i] = Args[i]->Generate();
-					//}
-
-
-					this->cmd = cmd_ln_init(0,  GetDefs(), Strict, parameters);
-
-					//for(int i = 0;i<Args->Length;i++)
-					//{
-					//	ArgStruct::Release(argslist[i]);
-					//}
-
-
-				//	free(argslist);
-				//}
-
-
-			}
-			return this->cmd!=0;
+			return (this->cmd = cmd_ln_init(0,  GetDefs(), Strict, parameters))!=0;
 		}
 		bool ParseFile( String^ file, bool Strict)
 		{
@@ -84,36 +57,11 @@ namespace PocketSphinxNet
 
 				if(str!=IntPtr::Zero)
 				{
-					//if(Args!=nullptr)
-					//{
-					//	arg_t* argslist = (arg_t*)malloc(sizeof(arg_t)*(Args->Length + 1));
 
-					//	if(argslist!=0)
-					//	{
-					//		memset(&argslist[Args->Length],0,sizeof(arg_t));
+					this->cmd = cmd_ln_parse_file_r(0, GetDefs(),(char*) str.ToPointer(),Strict);
 
-					//		for(int i = 0;i<Args->Length;i++)
-					//		{
-					//			argslist[i] = Args[i]->Generate();
-					//		}
-
-
-							this->cmd = cmd_ln_parse_file_r(0, GetDefs(),(char*) str.ToPointer(),Strict);
-
-							//for(int i = 0;i<Args->Length;i++)
-							//{
-							//	ArgStruct::Release(argslist[i]);
-							//}
-
-
-					//		free(argslist);
-					//	}
-
-
-					//}
-
+					Marshal::FreeHGlobal(str);
 				}
-				Marshal::FreeHGlobal(str);
 			}
 			return this->cmd!=0;
 		}
@@ -140,33 +88,11 @@ namespace PocketSphinxNet
 				if(str!=IntPtr::Zero)
 				{
 					found = cmd_ln_exists_r(this->cmd,(char*) str.ToPointer())!=0;
+					Marshal::FreeHGlobal(str);
 				}
-				Marshal::FreeHGlobal(str);
 			}
 			return found;
 		}
-		//Object^ Access(String^ name)
-		//{
-		//	Object^ found = nullptr;
-		//	if(this->cmd!=0 && name!=nullptr)
-		//	{
-		//		IntPtr str = Marshal::StringToHGlobalAnsi(name);
-
-		//		if(str!=IntPtr::Zero)
-		//		{
-		//			anytype_t* arg =cmd_ln_access_r(this->cmd,(char*) str.ToPointer());
-
-		//			if(arg!=0)
-		//			{
-		//			
-		//				//TODO: conver to object
-		//			}
-
-		//		}
-		//		Marshal::FreeHGlobal(str);
-		//	}
-		//	return found;
-		//}
 
 		String^ GetString(String^ name)
 		{
@@ -178,9 +104,9 @@ namespace PocketSphinxNet
 				if(str!=IntPtr::Zero)
 				{
 					found = gcnew String(cmd_ln_str_r(this->cmd, (char*)str.ToPointer()));
+					Marshal::FreeHGlobal(str);
 
 				}
-				Marshal::FreeHGlobal(str);
 			}
 			return found;
 		}
@@ -204,8 +130,8 @@ namespace PocketSphinxNet
 						pl ++;
 					}
 
+					Marshal::FreeHGlobal(str);
 				}
-				Marshal::FreeHGlobal(str);
 			}
 			return texts;
 		}
@@ -219,20 +145,13 @@ namespace PocketSphinxNet
 
 				if(str!=IntPtr::Zero)
 				{
-					found = gcnew String(cmd_ln_str_r(this->cmd, (char*)str.ToPointer()));
-
-					if(Int32::TryParse(found, ret))
-					{
-						//OK
-					}
-
-
+					ret = cmd_ln_int_r(this->cmd,(char*)str.ToPointer());
+					Marshal::FreeHGlobal(str);
 				}
-				Marshal::FreeHGlobal(str);
 			}
 			return ret;
 		}
-		double GetFloat(String^ name)
+		double GetFloat64(String^ name)
 		{
 			double ret = 0;
 			String^ found = nullptr;
@@ -242,18 +161,28 @@ namespace PocketSphinxNet
 
 				if(str!=IntPtr::Zero)
 				{
-					found = gcnew String(cmd_ln_str_r(this->cmd, (char*)str.ToPointer()));
-
-					if(Double::TryParse(found, ret))
-					{
-						//OK
-					}
+					ret = cmd_ln_float64_r(this->cmd,(char*)str.ToPointer());
+					Marshal::FreeHGlobal(str);
 				}
-				Marshal::FreeHGlobal(str);
 			}
 			return ret;
 		}
+		double GetFloat32(String^ name)
+		{
+			float ret = 0;
+			String^ found = nullptr;
+			if(this->cmd!=0 && name!=nullptr)
+			{
+				IntPtr str = Marshal::StringToHGlobalAnsi(name);
 
+				if(str!=IntPtr::Zero)
+				{
+					ret = cmd_ln_float32_r(this->cmd,(char*)str.ToPointer());
+					Marshal::FreeHGlobal(str);
+				}
+			}
+			return ret;
+		}
 
 		bool SetString(String^ name,String^ value)
 		{
@@ -288,8 +217,8 @@ namespace PocketSphinxNet
 				{
 					cmd_ln_set_int_r(this->cmd,(char*)str.ToPointer(),value);
 					done = true;
+					Marshal::FreeHGlobal(str);
 				}
-				Marshal::FreeHGlobal(str);
 			}
 			return done;
 		}
@@ -305,8 +234,8 @@ namespace PocketSphinxNet
 					cmd_ln_set_float_r(this->cmd,(char*)str.ToPointer(),value);
 					done = true;
 
+					Marshal::FreeHGlobal(str);
 				}
-				Marshal::FreeHGlobal(str);
 			}
 			return done;
 		}
