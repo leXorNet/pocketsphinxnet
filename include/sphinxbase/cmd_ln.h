@@ -627,6 +627,18 @@ SPHINXBASE_EXPORT
 void cmd_ln_free (void);
 
 
+#ifndef POCKETSPHINX_NET
+SPHINXBASE_EXPORT
+#endif
+
+
+char** cmd_ln_get_argv(cmd_ln_t *cmdln);
+#ifndef POCKETSPHINX_NET
+SPHINXBASE_EXPORT
+#endif
+int cmd_ln_get_argc(cmd_ln_t* cmdln);
+
+
 #ifdef __cplusplus
 }
 #endif
