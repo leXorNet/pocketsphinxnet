@@ -380,44 +380,18 @@ namespace PocketSphinxNet
 			}
 			return ret;
 		}
-
-		int ProcessCep([In,Out]array<float>^ data,bool no_search,bool full_utt)
+#ifdef USE_UNSAFE
+		int ProcessCep(float** data,int length,bool no_search,bool full_utt)
 		{
 			int ret = -1;
 
 			if(this->decoder!=0 && data!=nullptr)
 			{
-				IntPtr buffer = Marshal::AllocHGlobal(data->Length*sizeof(float)) ;
-
-				if(buffer!=IntPtr::Zero)
-				{
-					Marshal::Copy(data,0,buffer,data->Length);
-
-					IntPtr ptrs = Marshal::AllocHGlobal(data->Length*sizeof(IntPtr)) ;
-
-					if(ptrs!=IntPtr::Zero)
-					{
-						//TODO: put address of buffer items to ptrs
-						mfcc_t* first = ((mfcc_t*)buffer.ToPointer());
-
-						for(int i = 0;i<data->Length;i++)
-						{
-							*((mfcc_t**)ptrs.ToPointer()+i)=first;
-							first +=sizeof(mfcc_t);
-						}
-						ret = ps_process_cep(this->decoder,(mfcc_t**)ptrs.ToPointer(),data->Length,no_search?1:0,full_utt?1:0);
-
-						Marshal::FreeHGlobal(ptrs);
-					}
-
-					Marshal::Copy(buffer,data,0,data->Length);
-
-
-					Marshal::FreeHGlobal(buffer);
-				}
+				ret = ps_process_cep(this->decoder,ata,length,no_search?1:0,full_utt?1:0);
 			}
 			return ret;
 		}
+#endif
 
 		bool StartUtt(String^ uttid)
 		{
