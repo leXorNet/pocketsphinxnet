@@ -152,20 +152,20 @@ namespace PocketSphinxNet
 			return nullptr;
 		}
 
-		FiniteStateGrammar^ GetFiniteStateGrammarSet()
+		FiniteStateGrammarSet^ GetFiniteStateGrammarSet()
 		{
 			if(this->decoder!=0)
 			{
-				return gcnew FiniteStateGrammar(ps_get_fsgset(this->decoder));
+				return gcnew FiniteStateGrammarSet(ps_get_fsgset(this->decoder));
 			}
 			return nullptr;
 		}
 
-		FiniteStateGrammar^ UpdateFiniteStateGrammarSet()
+		FiniteStateGrammarSet^ UpdateFiniteStateGrammarSet()
 		{
 			if(this->decoder!=0)
 			{
-				return gcnew FiniteStateGrammar(ps_get_fsgset(this->decoder));
+				return gcnew FiniteStateGrammarSet(ps_update_fsgset(this->decoder));
 			}
 			return nullptr;
 		}
