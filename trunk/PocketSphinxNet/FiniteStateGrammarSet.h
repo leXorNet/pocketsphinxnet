@@ -1,11 +1,16 @@
 #pragma once;
 
 #include "pocketsphinx.h"
+#include "FiniteStateGrammarModel.h"
 
 using namespace System;
 using namespace System::Runtime::InteropServices;
 namespace PocketSphinxNet
 {
+	public ref class FiniteStateGrammarIterator
+	{
+
+	};
 	public ref class FiniteStateGrammarSet
 	{
 	internal:
@@ -52,6 +57,7 @@ namespace PocketSphinxNet
 			}
 			return done;
 		}
+
 
 
 	};

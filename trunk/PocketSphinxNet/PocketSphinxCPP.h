@@ -8,7 +8,7 @@
 #include "FeatureComputation.h"
 #include "FeatureTrans.h"
 #include "NGramModel.h"
-#include "FiniteStateGrammar.h"
+#include "FiniteStateGrammarSet.h"
 #include "Lattice.h"
 #include "Segment.h"
 #include "NBest.h"
@@ -26,8 +26,8 @@ namespace PocketSphinxNet
 	public ref class PocketSphinx
 	{
 	 internal:
-		ps_decoder_t* decoder;
 
+		ps_decoder_t* decoder;
 
 	public:
 		PocketSphinx()
@@ -232,9 +232,13 @@ namespace PocketSphinxNet
 
 		PocketSphinx^ Clone()
 		{
-			return this->decoder!=0 ? gcnew
-				PocketSphinx(ps_retain(this->decoder))
-				: nullptr;
+			if(this->decoder!=0)
+			{
+				ps_decoder_t* decoder = ps_retain(this->decoder);
+
+				return decoder!=0 ? gcnew PocketSphinx(decoder) : nullptr;
+			}
+			return nullptr;
 		}
 
 		bool LoadDict(String^ dictfile,String^ fdictfile, String^ format)
@@ -308,7 +312,7 @@ namespace PocketSphinxNet
 				array<IntPtr>^ params =  gcnew array<IntPtr>(2)
 				{ 
 					Marshal::StringToHGlobalAnsi(word), 
-						Marshal::StringToHGlobalAnsi(phones)
+					phones!=nullptr ? Marshal::StringToHGlobalAnsi(phones): IntPtr::Zero
 				};
 
 				ret = ps_add_word(this->decoder,(char*)params[0].ToPointer(),(char*)params[1].ToPointer(),update);
@@ -368,30 +372,24 @@ namespace PocketSphinxNet
 			int ret = -1;
 			if(this->decoder!=0 && data!=nullptr)
 			{
-				IntPtr buffer = Marshal::AllocHGlobal(data->Length*sizeof(Int16)) ;
-				if(buffer!=IntPtr::Zero)
-				{
-					Marshal::Copy(data,0,buffer,data->Length);
+				pin_ptr<short> pdata = &data[0];
 
-					ret = ps_process_raw(this->decoder,(const int16*)buffer.ToPointer(),data->Length,no_search?1:0,full_ut?1:0);
+				ret = ps_process_raw(this->decoder,pdata,data->Length,no_search?1:0,full_ut?1:0);
 
-					Marshal::FreeHGlobal(buffer);
-				}
 			}
 			return ret;
 		}
-#ifdef USE_UNSAFE
+
 		int ProcessCep(float** data,int length,bool no_search,bool full_utt)
 		{
 			int ret = -1;
 
 			if(this->decoder!=0 && data!=nullptr)
 			{
-				ret = ps_process_cep(this->decoder,ata,length,no_search?1:0,full_utt?1:0);
+				ret = ps_process_cep(this->decoder,data,length,no_search?1:0,full_utt?1:0);
 			}
 			return ret;
 		}
-#endif
 
 		bool StartUtt(String^ uttid)
 		{
@@ -405,8 +403,9 @@ namespace PocketSphinxNet
 				if(str!=IntPtr::Zero)
 				{
 					done = ps_start_utt(this->decoder,(char*)str.ToPointer())==0;
+
+					Marshal::FreeHGlobal(str);
 				}
-				Marshal::FreeHGlobal(str);
 			}
 			return done;
 		}
