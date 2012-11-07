@@ -693,6 +693,29 @@ public:
 	static FileStream^ GetFileStream(_FILE* file){return (FileStream^) (GCHandle::FromIntPtr(IntPtr(file->file)).Target);}
 
 	static void FreeStream(_FILE* file){ GCHandle::FromIntPtr(IntPtr(file->file)).Free();}
+
+	static FILE* StreamToFile(FileStream^ fs)
+	{ 
+		if(fs!=nullptr)
+		{
+			_FILE* f = (_FILE*) malloc(sizeof(_FILE));
+
+			if(f!=0)
+			{
+				SetStream(f, fs);
+				return f;
+			}
+		}
+		return 0;
+	}
+
+	static void FreeeStreamFile(FILE* f)
+	{
+		if(f!=0)
+		{
+			FreeStream((_FILE*)f);
+		}
+	}
 };
 
 

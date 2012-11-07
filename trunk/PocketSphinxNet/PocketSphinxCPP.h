@@ -328,40 +328,65 @@ namespace PocketSphinxNet
 			return ret;
 		}
 
-		int DecodeSenscr(String^ file,String^ uutid,long maxsamps)
+
+
+		int DecodeRaw(FileStream^ fs, String^ uuid, int maxsamps)
 		{
 			int ret = -1;
-			if(this->decoder!=0 && file!=nullptr)
+			if(this->decoder!=0 && fs!=nullptr)
 			{
-				array<IntPtr>^ str_dictfiles =  gcnew array<IntPtr>(2)
-				{ 
-					Marshal::StringToHGlobalAnsi(file), 
-						uutid!=nullptr ? Marshal::StringToHGlobalAnsi(uutid): IntPtr::Zero
-				};
-
-				if(str_dictfiles[0]!=IntPtr::Zero)
+				FILE* f = FILEHelper::StreamToFile(fs);
+				if(f!=0)
 				{
-					FILE* file = fopen((const char*)str_dictfiles[0].ToPointer(),"rb");
+					array<IntPtr>^ str_dictfiles =  gcnew array<IntPtr>(2)
+					{ 
+						Marshal::StringToHGlobalAnsi(uuid), 
+					};
 
-					if(file!=0)
+					ret = ps_decode_raw(this->decoder, f, (char*) str_dictfiles[0].ToPointer(), maxsamps);
+
+					for each (IntPtr var in str_dictfiles)
 					{
-						ret = ps_decode_raw(
-							this->decoder, 
-							file,
-							(char*)str_dictfiles[1].ToPointer(),
-							maxsamps
-							);
+						if(var!=IntPtr::Zero)
+						{
+							Marshal::FreeHGlobal(var);
+						}
 
-						fclose(file);
 					}
+					FILEHelper::FreeeStreamFile(f);
 				}
-				for each (IntPtr var in str_dictfiles)
+			}
+			return ret;
+		}
+		int DecodeSenscr(FileStream^ fs, String^ uutid)
+		{
+			int ret = -1;
+			if(this->decoder!=0 && fs!=nullptr)
+			{
+				FILE* f = FILEHelper::StreamToFile(fs);
+				if(f!=0)
 				{
-					if(var!=IntPtr::Zero)
+
+					array<IntPtr>^ str_dictfiles =  gcnew array<IntPtr>(2)
+					{ 
+						uutid!=nullptr ? Marshal::StringToHGlobalAnsi(uutid): IntPtr::Zero
+					};
+
+					ret = ps_decode_senscr(
+						this->decoder, 
+						f,
+						(char*)str_dictfiles[1].ToPointer()
+						);
+					for each (IntPtr var in str_dictfiles)
 					{
-						Marshal::FreeHGlobal(var);
+						if(var!=IntPtr::Zero)
+						{
+							Marshal::FreeHGlobal(var);
+						}
+
 					}
 
+					FILEHelper::FreeeStreamFile(f);
 				}
 			}
 
@@ -415,7 +440,6 @@ namespace PocketSphinxNet
 			if(this->decoder!=0)
 			{
 				return ps_end_utt(this->decoder)==0;
-
 			}
 			return false;
 		}
