@@ -230,6 +230,7 @@
     <ClInclude Include="..\include\win32\sphinx_config.h" />
     <ClInclude Include="Agc.h" />
     <ClInclude Include="Cmn.h" />
+    <ClInclude Include="FiniteStateGrammarModel.h" />
     <ClInclude Include="PitchEstimator.h" />
     <ClInclude Include="src\libsphinxbase\fe\fe_internal.h" />
     <ClInclude Include="src\libsphinxbase\fe\fe_warp.h" />
@@ -282,7 +283,7 @@
     <ClInclude Include="FeatureComputation.h" />
     <ClInclude Include="FrontEnd.h" />
     <ClInclude Include="FeatureTrans.h" />
-    <ClInclude Include="FiniteStateGrammar.h" />
+    <ClInclude Include="FiniteStateGrammarSet.h" />
     <ClInclude Include="Lattice.h" />
     <ClInclude Include="LogMath.h" />
     <ClInclude Include="NBest.h" />

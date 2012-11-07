@@ -55,9 +55,6 @@
     <ClInclude Include="NGramModel.h">
       <Filter>CLR</Filter>
     </ClInclude>
-    <ClInclude Include="FiniteStateGrammar.h">
-      <Filter>CLR</Filter>
-    </ClInclude>
     <ClInclude Include="NBest.h">
       <Filter>CLR</Filter>
     </ClInclude>
@@ -320,6 +317,12 @@
       <Filter>CLR</Filter>
     </ClInclude>
     <ClInclude Include="Cmn.h">
+      <Filter>CLR</Filter>
+    </ClInclude>
+    <ClInclude Include="FiniteStateGrammarModel.h">
+      <Filter>CLR</Filter>
+    </ClInclude>
+    <ClInclude Include="FiniteStateGrammarSet.h">
       <Filter>CLR</Filter>
     </ClInclude>
   </ItemGroup>
