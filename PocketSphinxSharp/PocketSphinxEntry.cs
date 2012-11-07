@@ -253,12 +253,16 @@ namespace PocketSphinxSharp
 
                   Console.WriteLine("Hypothesis: \"{0}\",Uttid:\"{1}\",Score:\"{2}\"", hyp, out_uttid, score);
 
-                  if (hyp == "goodbye")
+                  if (hyp != null)
                   {
-                    Console.WriteLine("Bye bye!");
+                    string[] parts = hyp.Split(' ');
+                    if (parts.Length > 0 && parts[0] == "goodbye")
+                    {
+                      Console.WriteLine("Bye bye!");
 
-                    break;
+                      break;
 
+                    }
                   }
 
                   if (this.recoder.Start() < 0)
