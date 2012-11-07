@@ -1245,3 +1245,13 @@ cmd_ln_free(void)
     cmd_ln_free_r(global_cmdln);
     global_cmdln = 0;
 }
+
+char** cmd_ln_get_argv(cmd_ln_t *cmdln)
+{
+	return cmdln!=0 ? cmdln->f_argv : 0;
+}
+
+int cmd_ln_get_argc(cmd_ln_t* cmdln)
+{
+	return cmdln!=0 ? cmdln->f_argc : 0;
+}

@@ -75,7 +75,36 @@ namespace PocketSphinxNet
 			}
 			return done ;
 		}
+		array<String^>^ GetArguments()
+		{
+			array<String^>^ args = nullptr;
+			if(this->cmd!=0)
+			{
+				int count = cmd_ln_get_argc(this->cmd);
 
+				if(count>0)
+				{
+				    char** pargs = cmd_ln_get_argv(this->cmd);
+					if(pargs!=0)
+					{
+						int i = 0;
+						args = gcnew array<String^>(count);
+
+						while(*pargs!=0)
+						{
+							args[i] = gcnew String(*pargs);
+							pargs ++;
+							if(i==count)
+							{
+								break;
+							}
+						}
+					}
+				}
+
+			}
+			return args;
+		}
 
 	public:
 		bool Exists(String^ name)
